@@ -1,0 +1,101 @@
+<html dir="rtl">
+<head>
+    {% load static %}
+    {# Load Css #}
+    <link rel="stylesheet" href={% static "adminpanel/css/bootstrap.min.css" %}>
+    <link rel="stylesheet" href={% static "adminpanel/css/fontawesome.min.css" %}>
+
+    {#  Load Scripts       #}
+    <script src={% static "adminpanel/js/jquery.js" %}></script>
+    <script src={% static "adminpanel/js/all.min.js" %}></script>
+    <script src={% static "adminpanel/js/bootstrap.min.js" %}></script>
+    <script src={% static "adminpanel/js/notify.min.js" %}></script>
+    <script src={% static "adminpanel/js/js.js" %}></script>
+    <link rel="stylesheet" href={% static "adminpanel/css/style.css" %}>
+
+</head>
+<body dir="rtl">
+<div class="container h-100  w-100 home-container">
+    <div class="justify-content-center">
+        <div class="row">
+            <div class="col col-lg-12  text-center pt-3">
+                <p style="font-family: Quran ; font-size: 21px">
+                    بسم الله الرحمن الرحیم
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-lg-6  text-right pt-3">
+                <p style="font-family: Farsi ; font-weight: lighter ; font-size: 14px">
+                    خوش آمدی محمد باقر عظیمی
+                </p>
+            </div>
+            <div class="col col-lg-6  text-left pt-3">
+                <p style="font-family: Farsi ; font-weight: lighter ; font-size: 14px">
+                    <span id="time"></span>
+                </p>
+            </div>
+        </div>
+        <div class="row horizontal-line">
+            <div class="col col-lg-6">
+                <p class="text-right" style="font-family: Farsi ; font-weight: lighter ; font-size: 14px">
+                    صفحه اصلی
+                </p>
+            </div>
+            <div class="col col-lg-6">
+                <a href={% url "logout" %}>
+                <p class="text-left" style="font-family: Farsi ; font-weight: lighter ; font-size: 14px">
+                خروج
+                </p>
+                </a>
+            </div>
+        </div>
+        <div class="row navbar-container">
+            <div class="col col-lg-3 col-sm-6 text-center">
+                <div class="inside-nav text-center">
+                    <a href="#">
+                        <i class="fas fa-archive" style="font-size: 70px ; margin-top:15px ;margin-bottom: 20px"></i>
+                        <p class="align-self-end">
+                            مدیریت آرشیو
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="col col-lg-3 col-sm-6 text-center">
+                <div class="inside-nav text-center">
+                    <a href="{% url 'conductor' %}">
+                        <i class=" fas fa-tv" style="font-size: 70px ; margin-top:15px ;margin-bottom: 20px"></i>
+                        <p class="align-self-end">
+                            مدیریت کنداکتور
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="col col-lg-3 col-sm-6">
+                <div class="inside-nav text-center">
+                    <a href="#">
+                        <i class="fas fa-users" style="font-size: 70px ; margin-top:15px ;margin-bottom: 20px"></i>
+                        <p class="align-self-end">
+                            مدیریت کاربران
+                        </p>
+                    </a>
+
+                </div>
+            </div>
+            <div class="col col-lg-3 col-sm-6 text-center">
+                <div class="inside-nav text-center">
+                    <a href="{% url "setting" %}">
+                        <i class="fas fa-cogs" style="font-size: 70px ; margin-top:15px ;margin-bottom: 20px"></i>
+                        <p class="align-self-end">
+                            تنظیمات سایت
+
+                        </p>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

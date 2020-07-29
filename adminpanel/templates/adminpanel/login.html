@@ -1,0 +1,68 @@
+<html dir="rtl">
+<head>
+    {% load static %}
+    {# Load Css #}
+    <link rel="stylesheet" href={% static "adminpanel/css/bootstrap.min.css" %}>
+    <link rel="stylesheet" href={% static "adminpanel/css/fontawesome.min.css" %}>
+    <link rel="stylesheet" href={% static "adminpanel/css/style.css" %}>
+
+    {#  Load Scripts       #}
+    <script src={% static "adminpanel/js/jquery.js" %}></script>
+    <script src={% static "adminpanel/js/all.min.js" %}></script>
+    <script src={% static "adminpanel/js/bootstrap.min.js" %}></script>
+    <script src={% static "adminpanel/js/notify.min.js" %}></script>
+    <script src={% static "adminpanel/js/js.js" %}></script>
+
+</head>
+<body dir="rtl">
+<div class="container mainpage">
+    <div class="row h-100">
+        <div class="login-container my-auto mx-auto w-50">
+            <div class="row">
+                <div class="col-lg-12 text-center p-3 title">
+                    فرم ورود
+                </div>
+            </div>
+            <form action="">
+                <div class="form-inline justify-content-center">
+                    <div class="row w-100 p-2">
+                        <div class="col-lg-6 text-center">
+                            <label for="username" class="col-form-label text-center">
+                                نام کاربری
+                            </label>
+                        </div>
+                        <div class="col-lg-6 text-center">
+                            <input type="text" id="username" class="form-control w-100 text-center">
+                        </div>
+                    </div>
+                    <div class="row w-100 p-2">
+                        <div class="col-lg-6 text-center">
+                            <label for="username" class="col-form-label text-center">
+                                رمز عبور
+                            </label>
+                        </div>
+                        <div class="col-lg-6 input-group">
+                            <div class="input-group-append">
+                                <span class="input-group-text eye-button">
+                                    <i class="fa fa-eye" aria-hidden="true" style="display: none"></i>
+                                    <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <input id="password" class="form-control text-center" type="password">
+
+                        </div>
+                    </div>
+                    <div class="row w-100 p-2">
+                        <div class="col-lg-12 text-center">
+                            <button id="submit" class="btn btn-warning">
+                                ورود
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
