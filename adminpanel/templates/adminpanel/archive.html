@@ -52,32 +52,11 @@
         <div class="row horizontal-line">
             <div class="col col-lg-12 text-right">
                 <p style="font-family: Farsi ; font-weight: lighter ; font-size: 14px">
-                    <a href="{% url "home" %}">صفحه اصلی</a> > کنداکتور
+                    <a href="{% url "home" %}">صفحه اصلی</a> > آرشیو
                 </p>
             </div>
         </div>
         <div style="margin-top:30px">
-            <form action="">
-
-                <div class="row">
-
-                    <div class="col-lg-2 form-group text-right p-2">
-                        <label>
-                            انتخاب تاریخ :
-                        </label>
-                    </div>
-                    <div class="col-lg-3 form-group text-right">
-                        <input value="{{ date }}" type="text" class="form-control text-center" id="datepick" name="date"
-                               style="min-width: 200px">
-                    </div>
-                    <div class="col-lg-1 form-group text-right">
-                        <button class="btn btn-primary" id="starter" type="submit">
-                            نمایش
-                        </button>
-                    </div>
-
-                </div>
-            </form>
             <form action={% url "postHandler" %}>
 
                 <div class="row">
@@ -93,14 +72,12 @@
                         </select>
                     </div>
                     <div class="col-lg-1 form-group text-right">
-                        <button id="do-collection-condcutor" class="btn btn-danger p-2">
+                        <button id="do-collection-archive" class="btn btn-danger p-2">
                             انجام
                         </button>
-                                    </form>
-
                     </div>
                     <div class="col-lg-6 text-left">
-                        <a href="{% url "newCondocturItem" %}">
+                        <a href="{% url "newArchiveItem" %}">
 
                             <button type="button" class="btn btn-warning p-2">
                                 اضافه کردن مورد جدید
@@ -109,17 +86,18 @@
 
                     </div>
                 </div>
-        <div class="row">
-                    <div class="col-lg-2 form-group text-right p-2">
-                        <label>
-                            جست و جو :
-                        </label>
-                    </div>
-                    <div class="col-lg-3 form-group text-right">
-                        <input class="form-control" placeholder="متن مورد نظر را وارد کنید ..." id="search">
-                    </div>
-
+            </form>
+            <div class="row">
+                <div class="col-lg-2 form-group text-right p-2">
+                    <label>
+                        جست و جو در این صفحه:
+                    </label>
                 </div>
+                <div class="col-lg-3 form-group text-right">
+                    <input class="form-control" placeholder="متن مورد نظر را وارد کنید ..." id="search">
+                </div>
+
+            </div>
             <table class="table table-hover text-light" style="font-size: 13px !important;">
                 <thead>
                 <tr>
@@ -129,9 +107,9 @@
                     </th>
                     <th scope="col">نام</th>
                     <th scope="col">توضیحات</th>
-                    <th scope="col">زمان شروع</th>
-                    <th scope="col">تاریخ</th>
-                    <th scope="col">مدت زمان</th>
+                    <th scope="col">طول</th>
+                    <th scope="col">نوع</th>
+                    <th scope="col">دسته</th>
                     <th scope="col">ویرایش</th>
 
 
@@ -148,21 +126,40 @@
                                 {{ item.desc }}
                             </p>
                         </td>
-                        <td>{{ item.persianStartTime }}</td>
-                        <td>{{ item.persianDate }}</td>
-                        <td>{{ item.duration }} دقیقه</td>
+                        <td>{{ item.duration }} دقیقه </td>
+                        <td>{{ item.itemType }}</td>
+                        <td>{{ item.category }} </td>
                         <td>
-                            <a href="{% url "conductorEditor" %}?id={{ item.id }}">
+                            <a href="{% url "archiveEditor" %}?id={{ item.id }}">
                                 ویرایش
                             </a>
                         </td>
 
                     </tr>
                 {% endfor %}
-
-
                 </tbody>
             </table>
+            <div class="row ">
+                <div class="col-lg-12 text-center">
+                    {% for page in pages %}
+                        <a href="{% url 'archive' %}?page={{ page }}">
+                            <button class="btn btn-success
+                                    {% if page == current_page %}
+                                                    btn-danger
+                                                    {% endif %}
+"
+                                    {% if page == current_page %}
+                                    disabled
+                                    {% endif %}
+                            >
+                                {{ page }}
+                            </button>
+                        </a>
+
+                    {% endfor %}
+
+                </div>
+            </div>
         </div>
     </div>
 </div>

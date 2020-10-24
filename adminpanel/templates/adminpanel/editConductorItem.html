@@ -6,6 +6,7 @@
     <link rel="stylesheet" href={% static "adminpanel/css/fontawesome.min.css" %}>
     <link rel="stylesheet" href={% static "adminpanel/css/persian-datepicker.css" %}>
     <link rel="stylesheet" href={% static "adminpanel/css/style.css" %}>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 
     {#  Load Scripts       #}
     <script src={% static "adminpanel/js/jquery.js" %}></script>
@@ -15,6 +16,7 @@
     <script src={% static "adminpanel/js/persian-date.min.js" %}></script>
     <script src={% static "adminpanel/js/persian-datepicker.min.js" %}></script>
     <script src={% static "adminpanel/js/js.js" %}></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
     <title>{{ title }}</title>
 
 </head>
@@ -52,13 +54,18 @@
         <div class="row horizontal-line">
             <div class="col col-lg-12 text-right">
                 <p style="font-family: Farsi ; font-weight: lighter ; font-size: 14px">
-                    <a href="{% url "home" %}">صفحه اصلی</a> > کنداکتور
+                    <a href="{% url "home" %}">صفحه اصلی > </a> <a href="{% url "conductor" %}">کنداکتور </a> > اضافه
+                    کردن
+                    آیتم
+                    جدید
                 </p>
             </div>
         </div>
         <div style="margin-top:30px">
-            <form action="">
-
+            <form method="post" action="{% url "postHandler" %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="handler" value="editThisConductorItem">
+                <input type="hidden" name="itemId" value="{{ item.id }}">
                 <div class="row">
 
                     <div class="col-lg-2 form-group text-right p-2">
@@ -67,115 +74,128 @@
                         </label>
                     </div>
                     <div class="col-lg-3 form-group text-right">
-                        <input value="{{ date }}" type="text" class="form-control text-center" id="datepick" name="date"
+                        <input value="{{ item.date }}" type="text" class="form-control text-center" id="datepick"
+                               name="date"
                                style="min-width: 200px">
+                        <small id="emailHelp" class="form-text text-center" style="font-size: 10px ">
+                            روز این برنامه را انتخاب کنید
+                        </small>
                     </div>
-                    <div class="col-lg-1 form-group text-right">
-                        <button class="btn btn-primary" id="starter" type="submit">
-                            نمایش
-                        </button>
+                    <div class="col-lg-1 form-group text-right p-2">
+                        <label>
+                            نام :
+                        </label>
                     </div>
+                    <div class="col-lg-3 form-group text-right">
+                        <input type="text" class="form-control text-center" value="{{ item.name }}" id="name"
+                               name="name"
+                        >
+                        <small id="emailHelp" class="form-text text-center" style="font-size: 10px ">
+                            یک نام انتخاب کنید
+                        </small>
+                    </div>
+                    <div class="col-lg-1 form-group text-right p-2" style="font-size: 13px">
+                        <label>
+                            ساعت شروع:
+                        </label>
+                    </div>
+                    <div class="col-lg-2 form-group text-right">
+                        <input value="{{ persianStartTime }}" type="text" class="form-control text-center" id="timepick"
+                               name="startTime"
+                        >
 
+                        <small id="emailHelp" class="form-text text-center" style="font-size: 10px ">
+                            ساعت شروع برنامه را در فرمت 24 ساعته وارد کنید؛ مثلا 15:35
+                        </small>
+
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-lg-3 form-group text-right p-2">
+                        <label>
+                            توضیحات برنامه را وارد کنید :
+                        </label>
+                    </div>
+                    <div class="col-lg-6 form-group text-right">
+                        <textarea type="text" class="form-control" id="desc" name="desc"
+                                  style="min-width: 200px">{{ item.desc }}</textarea>
+                        <small id="emailHelp" class="form-text text-center" style="font-size: 10px ">
+                            یک توضیح کوتاه در مورد این برنامه وارد کنید
+                        </small>
+                    </div>
+                    <div class="col-lg-1 form-group text-right p-2">
+                        <label>
+                            طول برنامه :
+                        </label>
+                    </div>
+                    <div class="col-lg-2 form-group text-right">
+                        <input type="number" class="form-control text-center" value={{ item.duration }} id="duration"
+                               name="duration"
+                        >
+                        <small id="emailHelp" class="form-text text-center" style="font-size: 10px ">
+                            مدت زمان طول برنامه به دقیقه را وارد کنید
+                        </small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 form-group text-right p-2">
+                        <label>
+                            تصویر آیتم :
+                        </label>
+                    </div>
+                    <div class="col-lg-3 form-group text-right">
+                        <input type="file" class="form-control" name="picture"
+                               style="background-color:transparent ; color : white">
+                        <small id="emailHelp" class="form-text text-center" style="font-size: 10px ">
+                            تصویر مورد نظر برای این آیتم را انتخاب کنید
+                        </small>
+                    </div>
+                    <div class="col-lg-2 form-group text-right p-2">
+                        <img src='{{ item.photo.url }}'
+                             style="height: auto ; width: 100% ; border: 2px dashed white ; border-radius: 9px">
+                    </div>
+                    <div class="col-lg-2 form-group text-center">
+                        <button name="meth" class="btn btn-warning" value="edit" type="submit">ویرایش</button>
+                    </div>
+                    <div class="col-lg-2 form-group text-center">
+                        <button name="meth" class="btn btn-danger" value="delete" type="submit">حذف
+                        </button>
+
+                    </div>
                 </div>
             </form>
-            <form action={% url "postHandler" %}>
-
-                <div class="row">
-                    <div class="col-lg-2 form-group text-right p-2">
-                        <label>
-                            انجام عمل دسته جمعی :
-                        </label>
-                    </div>
-                    <div class="col-lg-3 form-group text-right">
-                        <select id="collection-selector" class="form-control">
-                            <option selected value="null">یک عمل را انتخاب کنید</option>
-                            <option value="del">پاک کردن انتخاب شده ها</option>
-                        </select>
-                    </div>
-                    <div class="col-lg-1 form-group text-right">
-                        <button id="do-collection-condcutor" class="btn btn-danger p-2">
-                            انجام
-                        </button>
-                                    </form>
-
-                    </div>
-                    <div class="col-lg-6 text-left">
-                        <a href="{% url "newCondocturItem" %}">
-
-                            <button type="button" class="btn btn-warning p-2">
-                                اضافه کردن مورد جدید
-                            </button>
-                        </a>
-
-                    </div>
-                </div>
-        <div class="row">
-                    <div class="col-lg-2 form-group text-right p-2">
-                        <label>
-                            جست و جو :
-                        </label>
-                    </div>
-                    <div class="col-lg-3 form-group text-right">
-                        <input class="form-control" placeholder="متن مورد نظر را وارد کنید ..." id="search">
-                    </div>
-
-                </div>
-            <table class="table table-hover text-light" style="font-size: 13px !important;">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">
-                        <input type="checkbox" value="0" id="checkAll">
-                    </th>
-                    <th scope="col">نام</th>
-                    <th scope="col">توضیحات</th>
-                    <th scope="col">زمان شروع</th>
-                    <th scope="col">تاریخ</th>
-                    <th scope="col">مدت زمان</th>
-                    <th scope="col">ویرایش</th>
-
-
-                </tr>
-                </thead>
-                <tbody>
-                {% for item in items %}
-                    <tr>
-                        <th scope="row">{{ forloop.counter }}</th>
-                        <td><input type="checkbox" value="ch-{{ item.id }}"></td>
-                        <td>{{ item.name }}</td>
-                        <td>
-                            <p style="max-width: 350px ; white-space: nowrap ; text-overflow: ellipsis ; overflow: hidden">
-                                {{ item.desc }}
-                            </p>
-                        </td>
-                        <td>{{ item.persianStartTime }}</td>
-                        <td>{{ item.persianDate }}</td>
-                        <td>{{ item.duration }} دقیقه</td>
-                        <td>
-                            <a href="{% url "conductorEditor" %}?id={{ item.id }}">
-                                ویرایش
-                            </a>
-                        </td>
-
-                    </tr>
-                {% endfor %}
-
-
-                </tbody>
-            </table>
         </div>
     </div>
 </div>
+</div>
 <script type="text/javascript">
-
-
     $(document).ready(function () {
-        $("#search").on('keyup', function () {
-            let val = $(this).val().toLowerCase();
-            $('tbody tr').filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(val) > -1)
-            })
+        $("button[type=submit]").on("click", function (e) {
+            const name = $("#name").val()
+            const desc = $("#desc").val()
+            const duration = $("#duration").val()
+            if (name == "" || desc == "" || duration <= 0) {
+                e.preventDefault()
+                $.notify("فیلد های نام ، توضیحات و طول برنامه نمیتوانند خالی بمانند.", {
+                    position: "top center",
+                    style: "bootstrap",
+                    className: "error",
+                    autoHideDelay: 4000,
+                    gap: 2
+
+                })
+            }
         })
+        $('#timepick').timepicker({
+            timeFormat: 'H:mm',
+            interval: 60,
+            minTime: '00',
+            maxTime: '23',
+            dynamic: true,
+            dropdown: false,
+            scrollbar: true
+        });
         $("#datepick").pDatepicker({
             "formatter": function (unix) {
                 var self = this;

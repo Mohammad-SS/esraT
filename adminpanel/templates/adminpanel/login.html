@@ -12,6 +12,7 @@
     <script src={% static "adminpanel/js/bootstrap.min.js" %}></script>
     <script src={% static "adminpanel/js/notify.min.js" %}></script>
     <script src={% static "adminpanel/js/js.js" %}></script>
+    <title>{{ title }}</title>
 
 </head>
 <body dir="rtl">
@@ -23,7 +24,8 @@
                     فرم ورود
                 </div>
             </div>
-            <form action="">
+            <form action="{% url "postHandler" %}">
+                {% csrf_token %}
                 <div class="form-inline justify-content-center">
                     <div class="row w-100 p-2">
                         <div class="col-lg-6 text-center">
@@ -41,7 +43,7 @@
                                 رمز عبور
                             </label>
                         </div>
-                        <div class="col-lg-6 input-group">
+                        <div class="col-lg-6 input-group w-100">
                             <div class="input-group-append">
                                 <span class="input-group-text eye-button">
                                     <i class="fa fa-eye" aria-hidden="true" style="display: none"></i>

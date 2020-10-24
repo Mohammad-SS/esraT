@@ -1,0 +1,164 @@
+@font-face {
+    font-family: Farsi;
+    src: url("./IRANSans.woff");
+}
+
+@font-face {
+    font-family: "Yekan";
+    src: url("./BYekan.ttf");
+}
+
+@font-face {
+    font-family: "Quran";
+    src: url("./Quran.ttf");
+}
+
+body {
+    font-family: Farsi;
+    background-color: #c6dabf;
+
+}
+
+a {
+    color: unset !important;
+}
+
+/* Login Page */
+.login-container {
+    background-color: #283d3b;
+    border-radius: 20px;
+    color: #ffbe0b;
+    font-size: 13px;
+}
+
+.login-container input {
+    font-size: 13px;
+    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+}
+
+.login-container span.input-group-text {
+    /*background-color: #9fcdff;*/
+    /*border-color: red;*/
+    /*color: blue;*/
+    border-radius: 0 5px 5px 0 !important;
+}
+
+.login-container input {
+    background-color: white;
+    border-radius: 5px 0 0 5px !important;
+}
+
+.login-container .title {
+    font-weight: bold;
+}
+
+/* Home Page */
+
+.home-container {
+    background-color: #283d3b;
+    color: #ffbe0b;
+}
+
+.home-container .horizontal-line {
+    /*height: 45px;*/
+    padding-top: 15px;
+    background-color: #335c67;
+}
+
+.navbar-container .col {
+    padding-right: 30px;
+    padding-left: 30px;
+    padding-top: 20px;
+}
+
+.navbar-container .col .inside-nav {
+    height: 160px;
+    padding-bottom: 15px;
+    background-color: #f5cb5c;
+    color: #333533;
+    border-radius: 5px;
+    transition: 0.2s ease;
+}
+
+.navbar-container .col .inside-nav p {
+    transition: 1.5s ease;
+}
+
+.navbar-container .col .inside-nav svg {
+    transition: 1.5s ease;
+}
+
+.navbar-container .col .inside-nav:hover {
+    background-color: #333533;
+}
+
+.navbar-container .col .inside-nav:hover p {
+    color: #F5CB5C;
+    transform: scale(1.15, 1.15);
+}
+
+.navbar-container .col .inside-nav:hover svg {
+    color: #F5CB5C;
+    transform: scale(1.15, 1.15);
+}
+
+.text-stats{
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+}
+
+/* Norifications */
+.notifyjs-wrapper {
+    font-size: 11px;
+    direction: rtl;
+}
+
+.notifyjs-bootstrap-success {
+    background-image: none !important;
+}
+
+.notifyjs-bootstrap-error {
+    background-image: none !important;
+}
+
+/* Settings Screen */
+
+small {
+    color: #d3f7af !important;
+}
+
+select {
+    font-size: 13px !important;
+}
+
+select option {
+    font-size: 13px !important;
+}
+
+
+/* Date Pickers */
+
+.datepicker-persian {
+    width: 255px;
+
+    font-family: Farsi;
+    font-size: 13px;
+}
+
+.loader {
+    border: 6px solid #075b52; /* Light grey */
+    border-top: 6px solid #ffb901; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 0.5s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

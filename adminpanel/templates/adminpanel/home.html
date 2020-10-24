@@ -12,7 +12,7 @@
     <script src={% static "adminpanel/js/notify.min.js" %}></script>
     <script src={% static "adminpanel/js/js.js" %}></script>
     <link rel="stylesheet" href={% static "adminpanel/css/style.css" %}>
-
+    <title>{{ title }}</title>
 </head>
 <body dir="rtl">
 <div class="container h-100  w-100 home-container">
@@ -44,16 +44,16 @@
             </div>
             <div class="col col-lg-6">
                 <a href={% url "logout" %}>
-                <p class="text-left" style="font-family: Farsi ; font-weight: lighter ; font-size: 14px">
-                خروج
-                </p>
+                    <p class="text-left" style="font-family: Farsi ; font-weight: lighter ; font-size: 14px">
+                        خروج
+                    </p>
                 </a>
             </div>
         </div>
         <div class="row navbar-container">
             <div class="col col-lg-3 col-sm-6 text-center">
                 <div class="inside-nav text-center">
-                    <a href="#">
+                    <a href="{% url "archive" %}">
                         <i class="fas fa-archive" style="font-size: 70px ; margin-top:15px ;margin-bottom: 20px"></i>
                         <p class="align-self-end">
                             مدیریت آرشیو
@@ -73,7 +73,7 @@
             </div>
             <div class="col col-lg-3 col-sm-6">
                 <div class="inside-nav text-center">
-                    <a href="#">
+                    <a href="{% url "users" %}">
                         <i class="fas fa-users" style="font-size: 70px ; margin-top:15px ;margin-bottom: 20px"></i>
                         <p class="align-self-end">
                             مدیریت کاربران
@@ -95,7 +95,70 @@
                 </div>
             </div>
         </div>
+        <div class="container-fluid" style="margin-top: 40px">
+            <div class="row">
+                <div class="text-right">
+                    <h5 style="color: #63B0CD ; padding-bottom:23px">
+                        آمار کلی سرویس‌ :
+                    </h5>
+                </div>
+            </div>
+            <div class="row navbar-container text-stats">
+
+                <div class="col-lg-2 text-left">
+                </div>
+                <div class="col-lg-4 text-right">
+                    تعداد کل کاربران :
+                </div>
+                <div class="col-lg-3 text-center">
+                    {{ users.regular }} نفر
+                    <span style="color: #63B0CD">
+                                        ( {{ users.admin }} مدیر )
+                    </span>
+
+                </div>
+                <div class="col-lg-4 text-left">
+                </div>
+
+            </div>
+            <div class="row navbar-container text-stats">
+                <div class="col-lg-2 text-left">
+                </div>
+                <div class="col-lg-4 text-right">
+                    مجموع کل آیتم های صوتی آرشیو :
+                </div>
+                <div class="col-lg-3 text-center">
+                    {{ sounds.time }} دقیقه
+                    <span style="color: #63B0CD">
+
+                    ( {{ sounds.count }} عدد )
+                                        </span>
+                </div>
+                <div class="col-lg-4 text-left">
+                </div>
+            </div>
+            <div class="row navbar-container text-stats">
+
+                <div class="col-lg-2 text-left">
+                </div>
+                <div class="col-lg-4 text-right">
+                    مجموع کل آیتم های تصویری آرشیو :
+                </div>
+                <div class="col-lg-3 text-center">
+                    {{ videos.time }} دقیقه
+                    <span style="color: #63B0CD">
+                    ( {{ videos.count }} عدد )
+                                        </span>
+                </div>
+                <div class="col-lg-4 text-left">
+                </div>
+
+            </div>
+        </div>
+
+
     </div>
+</div>
 </div>
 </body>
 </html>
